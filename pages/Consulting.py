@@ -64,7 +64,7 @@ st.markdown("""
 
 
 # CSV 파일명
-CSV_FILE = "consulting_requests.csv"
+CSV_FILE = "data/consulting_requests.csv"
 
 # 기존 데이터 로드 (없으면 새로 생성)
 if os.path.exists(CSV_FILE):
