@@ -60,12 +60,12 @@ with st.container():
     cols = st.columns([2, 1])
     with cols[0]:
         st.markdown("<h2>KEVIN TAX 세무 컨설팅</h2>", unsafe_allow_html=True)
-        st.markdown("<h3>홍길동 세무사</h3>", unsafe_allow_html=True)
+        st.markdown("<h3>권도윤 세무사</h3>", unsafe_allow_html=True)
         st.markdown("<p>전문 분야: 법인 세무, 소득세, 양도세 절세 컨설팅</p>", unsafe_allow_html=True)
         st.markdown("<p>연락처: 010-1234-5678 | 이메일: hong@govtax.com</p>", unsafe_allow_html=True)
         st.markdown("<p><em>신뢰와 전문성을 바탕으로, 최적의 세무 솔루션을 제공합니다.</em></p>", unsafe_allow_html=True)
     with cols[1]:
-        st.image("data/images/profile.png", caption="홍길동 세무사", use_container_width=True)
+        st.image("data/images/profile.png", caption="권도윤 세무사", use_container_width=True)
 
 # ---------------------- 주요 서비스 섹션 ----------------------
 st.markdown("<hr>", unsafe_allow_html=True)
@@ -97,7 +97,7 @@ st.markdown("<hr>", unsafe_allow_html=True)
 st.markdown("<h3>상담 신청</h3>", unsafe_allow_html=True)
 # 상담 신청 버튼: 클릭 시 Consulting.py 페이지로 이동 (링크 형식으로 구현)
 st.markdown("""
-    <a href="Consulting.py" class="consult-btn">1:1 상담 신청</a>
+    <a href="pages/Consulting.py" class="consult-btn">1:1 상담 신청</a>
     """, unsafe_allow_html=True)
 
 # ---------------------- 회사 위치 및 연락처 ----------------------
