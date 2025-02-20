@@ -51,7 +51,7 @@ st.markdown("""
 
 # ---------------------- 헤더: 로고 배치 ----------------------
 # st.image()를 사용하여 중앙에 KEVIN TAX 로고를 표시합니다.
-st.image("images/logo.png", width=200)  # 로고 이미지를 중앙에 배치합니다.
+st.image("data/images/logo.png", width=200)  # 로고 이미지를 중앙에 배치합니다.
 
 # ---------------------- 메인 배너: 세무사 프로필 ----------------------
 st.markdown("<hr>", unsafe_allow_html=True)
@@ -65,7 +65,7 @@ with st.container():
         st.markdown("<p>연락처: 010-1234-5678 | 이메일: hong@govtax.com</p>", unsafe_allow_html=True)
         st.markdown("<p><em>신뢰와 전문성을 바탕으로, 최적의 세무 솔루션을 제공합니다.</em></p>", unsafe_allow_html=True)
     with cols[1]:
-        st.image("images/profile.png", caption="홍길동 세무사", use_container_width=True)
+        st.image("data/images/profile.png", caption="홍길동 세무사", use_container_width=True)
 
 # ---------------------- 주요 서비스 섹션 ----------------------
 st.markdown("<hr>", unsafe_allow_html=True)
@@ -79,7 +79,7 @@ service_descriptions = [
     "정확한 소득세 신고와 절세 방안을 제공합니다.",
     "세무 관련 모든 문제에 대해 전문 상담을 제공합니다."
 ]
-service_icons = ["images/icon1.png", "images/icon2.png", "images/icon3.png", "images/icon4.png"]  # 각 서비스에 사용할 아이콘 이미지 파일
+service_icons = ["data/images/icon1.png", "data/images/icon2.png", "data/images/icon3.png", "images/icon4.png"]  # 각 서비스에 사용할 아이콘 이미지 파일
 
 # 4개의 서비스를 4열로 그리드 형식 배치
 cols = st.columns(4)
