@@ -89,7 +89,7 @@ def get_response():
     """
     user_input = st.session_state.chat_input
     if user_input:
-        with st.spinner("헷GPT가 답변을 생성 중입니다..."):
+        with st.spinner("Kevin이이 답변을 생성 중입니다..."):
             # Pinecone에서 관련 컨텍스트 검색
             results = query_pinecone(user_input)
             context = ""
