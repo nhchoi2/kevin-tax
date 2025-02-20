@@ -4,7 +4,7 @@ import pandas as pd
 
 # 페이지 설정: 제목 및 레이아웃 지정
 st.set_page_config(
-    page_title="KEVIN TAX - 세무 컨설팅",
+    page_title="THE KEVIN's TAX LAB - 세무 컨설팅",
     layout="wide"
 )
 
@@ -59,10 +59,10 @@ with st.container():
     # 좌측: 텍스트 정보, 우측: 세무사 사진
     cols = st.columns([2, 1])
     with cols[0]:
-        st.markdown("<h2>KEVIN TAX 세무 컨설팅</h2>", unsafe_allow_html=True)
+        st.markdown("<h2>THE KEVIN's TAX LAB 세무 컨설팅</h2>", unsafe_allow_html=True)
         st.markdown("<h3>권도윤 세무사</h3>", unsafe_allow_html=True)
         st.markdown("<p>전문 분야: 법인 세무, 소득세, 양도세 절세 컨설팅</p>", unsafe_allow_html=True)
-        st.markdown("<p>연락처: 010-1234-5678 | 이메일: hong@govtax.com</p>", unsafe_allow_html=True)
+        st.markdown("<p>연락처: 02-403-0601 | 이메일: akathekevin@thekevintaxlab.com</p>", unsafe_allow_html=True)
         st.markdown("<p><em>신뢰와 전문성을 바탕으로, 최적의 세무 솔루션을 제공합니다.</em></p>", unsafe_allow_html=True)
     with cols[1]:
         st.image("data/images/profile.png", caption="권도윤 세무사", use_container_width=True)
@@ -104,7 +104,7 @@ st.markdown("""
 st.markdown("<hr>", unsafe_allow_html=True)
 st.markdown("<h3>회사 위치 및 연락처</h3>", unsafe_allow_html=True)
 # 회사 주소 및 연락처 정보 표시
-st.markdown("<p>주소: 서울특별시 송파구 송파대로22길 5-20, 1층 101호 THE KEVIN's TAX</p>", unsafe_allow_html=True)
+st.markdown("<p>주소: 서울특별시 송파구 송파대로22길 5-20, 1층 101호 THE KEVIN's TAX LAB</p>", unsafe_allow_html=True)
 st.markdown("<p>전화: 02-403-0601 | 이메일: akathekevin@thekevintaxlab.com</p>", unsafe_allow_html=True)
 
 # 지도 표시: st.map()를 사용하여 간단한 지도를 표시 (예: 회사 위치 좌표 사용)
@@ -117,4 +117,4 @@ st.map(location_data, use_container_width=True)
 
 # ---------------------- 최종 안내 문구 ----------------------
 st.markdown("<hr>", unsafe_allow_html=True)
-st.markdown("<p style='text-align:center;'>KEVIN TAX - 신뢰와 전문성의 세무 컨설팅</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align:center;'>THE KEVIN's TAX LAB - 신뢰와 전문성의 세무 컨설팅</p>", unsafe_allow_html=True)
