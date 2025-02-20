@@ -32,7 +32,7 @@ if pinecone_index_name not in [idx.name for idx in pc.list_indexes()]:
 index = pc.Index(pinecone_index_name)
 
 # 4. Streamlit UI 설정
-st.set_page_config(page_title="헷GPT", page_icon="💬", layout="wide")
+st.set_page_config(page_title="세법전문 AI, Kevin", page_icon="💬", layout="wide")
 
 # 사이드바: 설정 및 대화 기록 초기화
 with st.sidebar:
@@ -43,8 +43,8 @@ with st.sidebar:
         st.success("대화 기록이 초기화되었습니다.")
 
 # 메인 타이틀 및 설명
-st.title("💬 똑똑한 AI 헷GPT")
-st.write("질문을 입력하면 헷GPT가 답변해드립니다.")
+st.title("💬 세법전문 AI, Kevin")
+st.write("질문을 입력하면 Kevin이 답변해드립니다.")
 
 if "chat_history" not in st.session_state:
     st.session_state.chat_history = []
@@ -69,6 +69,19 @@ def query_pinecone(query_text, top_k=3):
     results = index.query(vector=embedding, top_k=top_k, include_metadata=True)
     return results
 
+def generate_prompt(user_input, context):
+    system_prompt = """
+당신은 전문적인 세무사 관리자입니다. 항상 친절하고 자세하게 답변하세요.
+사용자가 질문을 입력하면, 해당 질문에 대해 전문적인 세무 상담 답변을 제공합니다.
+단, 질문이 너무 짧거나 구체적인 내용이 부족하면 반드시 "질문에 대한 내용이 많아 답변이 어렵습니다. 구체적으로 질문해주세요"라는 메시지로 응답하십시오.
+    """
+    # 사용자 질문이 너무 짧은 경우 바로 해당 메시지를 반환합니다.
+    if len(user_input.strip()) < 10:
+        return "질문에 대한 내용이 많아 답변이 어렵습니다. 구체적으로 질문해주세요."
+    
+    prompt = f"{system_prompt}\nContext:\n{context}\n\nQuestion: {user_input}\nAnswer:"
+    return prompt
+
 def get_response():
     """
     사용자의 입력과 Pinecone에서 검색된 컨텍스트를 기반으로,
@@ -83,18 +96,23 @@ def get_response():
             if results and "matches" in results:
                 for match in results["matches"]:
                     context += match["metadata"].get("text", "") + "\n"
-            # 컨텍스트와 질문을 결합한 프롬프트 구성
             
-            prompt = f"Context:\n{context}\n\nQuestion: {user_input}\nAnswer:"
-            # 채팅 응답 생성 (google/gemma-2-9b-it 모델 사용)
-            response = client.chat.completions.create(
-                model="google/gemma-2-9b-it",
-                messages=[{"role": "user", "content": prompt}],
-                max_tokens=1024,
-            ).choices[0].message.content
+            # generate_prompt 함수를 통해 전체 프롬프트 구성
+            prompt = generate_prompt(user_input, context)
+            
+            # 프롬프트가 단순한 구체성 부족 메시지인 경우, 모델 호출 없이 해당 메시지를 응답으로 사용
+            if prompt == "질문에 대한 내용이 많아 답변이 어렵습니다. 구체적으로 질문해주세요.":
+                response = prompt
+            else:
+                response = client.chat.completions.create(
+                    model="google/gemma-2-9b-it",
+                    messages=[{"role": "user", "content": prompt}],
+                    max_tokens=1024,
+                ).choices[0].message.content
+            
             # 대화 기록 업데이트 (최신 메시지가 위에 표시되도록)
             st.session_state.chat_history.insert(0, ("👤 사용자:", user_input))
-            st.session_state.chat_history.insert(0, ("🤖 헷GPT:", response))
+            st.session_state.chat_history.insert(0, ("🤖 Kevin:", response))
             st.session_state.pop("chat_input", None)
 
 # 대화 기록 출력 (최신 메시지가 위쪽에 보이도록 역순 출력)
