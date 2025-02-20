@@ -79,7 +79,7 @@ service_descriptions = [
     "정확한 소득세 신고와 절세 방안을 제공합니다.",
     "세무 관련 모든 문제에 대해 전문 상담을 제공합니다."
 ]
-service_icons = ["data/images/icon1.png", "data/images/icon2.png", "data/images/icon3.png", "images/icon4.png"]  # 각 서비스에 사용할 아이콘 이미지 파일
+service_icons = ["data/images/icon1.png", "data/images/icon2.png", "data/images/icon3.png", "data/images/icon4.png"]  # 각 서비스에 사용할 아이콘 이미지 파일
 
 # 4개의 서비스를 4열로 그리드 형식 배치
 cols = st.columns(4)
@@ -96,9 +96,11 @@ for i, col in enumerate(cols):
 st.markdown("<hr>", unsafe_allow_html=True)
 st.markdown("<h3>상담 신청</h3>", unsafe_allow_html=True)
 # 상담 신청 버튼: 클릭 시 Consulting.py 페이지로 이동 (링크 형식으로 구현)
-st.markdown("""
-    <a href="pages/Consulting.py" class="consult-btn">1:1 상담 신청</a>
-    """, unsafe_allow_html=True)
+
+
+if st.button("📞 1:1 상담 신청"):
+    st.switch_page("pages/Consulting.py")
+
 
 # ---------------------- 회사 위치 및 연락처 ----------------------
 st.markdown("<hr>", unsafe_allow_html=True)
