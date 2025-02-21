@@ -85,7 +85,7 @@ def generate_prompt(user_input, context):
         """
     # 사용자 질문이 너무 짧은 경우 바로 해당 메시지를 반환합니다.
     if len(user_input.strip()) < 10:
-        return "질문에 대한 내용이 많아 답변이 어렵습니다. 구체적으로 질문해주세요."
+        return "세법 관련 내용만 답변이 가능 합니다. "
     
     prompt = f"{system_prompt}\nContext:\n{context}\n\nQuestion: {user_input}\nAnswer:"
     return prompt
