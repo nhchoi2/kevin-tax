@@ -1,0 +1,160 @@
+/* ────────────────────────────── */
+/* 전역 초기화 및 기본 설정 */
+html {
+    font-size: 16px;
+    box-sizing: border-box;
+  }
+  
+  *, *::before, *::after {
+    box-sizing: inherit;
+  }
+  
+  body {
+    font-family: 'Pretendard', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f9f9f9;
+    color: #333;
+    line-height: 1.5;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+  
+  /* ────────────────────────────── */
+  /* 헤더 */
+  
+  .main-header {
+    background: linear-gradient(to right, #dfefff, #0d3d6a);
+    color: #ffffff;
+    padding: 12px 32px;
+  }
+  
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  /* 로고 + 텍스트 묶음 */
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .logo img {
+    height: 40px;
+  }
+  
+  .logo-text {
+    line-height: 1.2;
+    font-weight: bold;
+    font-size: 14px;
+  }
+  
+  .logo-text .sub {
+    font-size: 12px;
+    font-weight: normal;
+  }
+  
+  /* 메뉴 */
+  .main-nav {
+    display: flex;
+    gap: 30px;
+    font-size: 14px;
+  }
+  
+  .main-nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .main-nav a:hover {
+    text-decoration: underline;
+  }
+  
+  /* 로그인 + 상담 버튼 */
+  .nav-actions {
+    display: flex;
+    gap: 16px;
+  }
+  
+  .nav-actions a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: normal;
+  }
+  
+  /* ────────────────────────────── */
+  /* 메인 콘텐츠 및 CTA 버튼 */
+  
+  main {
+    padding: 50px;
+    text-align: center;
+  }
+  
+  .cta {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 24px;
+    background: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+  }
+  
+  /* ────────────────────────────── */
+  /* 푸터 */
+  
+  footer {
+    text-align: center;
+    padding: 20px;
+    background: #eee;
+    font-size: 14px;
+    color: #555;
+  }
+  
+  /* ────────────────────────────── */
+  /* 반응형 대응 */
+  
+  @media (max-width: 1024px) {
+    .main-nav {
+      gap: 20px;
+      font-size: 13px;
+    }
+  
+    .nav-actions {
+      gap: 12px;
+    }
+  
+    .logo img {
+      height: 32px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .header-inner {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+  
+    .main-nav {
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+  
+    .nav-actions {
+      align-self: flex-end;
+    }
+  
+    main {
+      padding: 30px 16px;
+    }
+  }
