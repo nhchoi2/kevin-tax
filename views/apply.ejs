@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+</head>
+<body>
+  <%- include('partials/header') %>
+
+  <main class="container" style="padding: 60px 0;">
+    <h2 style="text-align: center; font-size: 22px; margin-bottom: 40px;">
+      끊임없는 연구로 도출된 절세전략, 전문가와의 상담을 통해 확인해보세요.
+    </h2>
+
+    <div class="apply-grid">
+      <!-- 📌 왼쪽: 신청 폼 -->
+      <form class="apply-form">
+        <h3>신청하기</h3>
+
+        <!-- 한 줄에 두 필드 -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="type">상담 유형 *</label>
+            <select id="type" required>
+              <option value="">선택</option>
+              <option value="세무자문">세무자문</option>
+              <option value="경정청구">경정청구</option>
+              <option value="세무조사">세무조사</option>
+              <option value="세무기장">세무기장</option>
+              <option value="재산제세">재산제세</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="name">성함 또는 회사명 *</label>
+            <input type="text" id="name" required />
+          </div>
+        </div>
+
+        <label for="phone">연락처 *</label>
+        <input type="tel" id="phone" placeholder="예시: 010-0000-0000" required />
+
+        <label for="detail">상담 내용을 자세히 적어주세요.</label>
+        <textarea id="detail" rows="5"></textarea>
+
+        <div class="checkbox-wrapper">
+            <input type="checkbox" id="agree" required />
+            <label for="agree">개인정보 수집 및 이용에 동의합니다.</label>
+        </div>
+
+        <button type="submit" class="submit-btn">신청서 작성</button>
+      </form>
+
+      <!-- 📌 오른쪽: 상담 리스트 -->
+      <div class="apply-list">
+        <h3>실시간 상담 현황</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>날짜</th>
+              <th>상담유형</th>
+              <th>상담내용</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>02/20</td>
+              <td>세무자문</td>
+              <td>회사 주식을 팔았는데 세금 신고 해야하나...</td>
+            </tr>
+            <tr>
+              <td>02/17</td>
+              <td>경정청구</td>
+              <td>연구소 설립했는데 세무 혜택이 어떤게...</td>
+            </tr>
+            <tr>
+              <td>02/14</td>
+              <td>세무조사</td>
+              <td>상속 세무조사가 나왔다고 하는데 그냥...</td>
+            </tr>
+            <tr>
+              <td>02/13</td>
+              <td>세무기장</td>
+              <td>스타트업 시드 투자 받았는데 세무기장을 맡기고 싶습...</td>
+            </tr>
+            <tr>
+              <td>02/13</td>
+              <td>재산제세</td>
+              <td>지난 1월 아버지가 돌아가셨는데 어디서부터 어...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <%- include('partials/footer') %>
+</body>
+</html>

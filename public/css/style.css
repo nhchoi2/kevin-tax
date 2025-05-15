@@ -1,160 +1,405 @@
-/* ────────────────────────────── */
-/* 전역 초기화 및 기본 설정 */
-html {
-    font-size: 16px;
-    box-sizing: border-box;
+/* 📌 공통: 전체 페이지 기본 설정 */
+html { font-size: 16px; box-sizing: border-box; }  /* 루트 글자 크기 설정 및 박스 모델 초기화 */
+*, *::before, *::after { box-sizing: inherit; }  /* 모든 요소에 box-sizing 상속 */
+body { font-family: 'Pretendard', sans-serif; margin: 0; padding: 0; background: #f5f6fa; color: #333; line-height: 1.5; }  /* 기본 바디 스타일 */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 16px; }  /* 전체 콘텐츠 중앙 정렬 컨테이너 */
+
+/* 📌 헤더: 기본 상단 헤더 스타일 */
+.main-header { background: white; color: #000; padding: 12px 32px; box-shadow: 0 1px 4px rgba(0,0,0,0.05); }  /* 헤더 배경 및 그림자 */
+.header-inner { display: flex; align-items: center; justify-content: space-between; }  /* 헤더 내부 로고/메뉴/버튼 정렬 */
+
+/* 📌 로고 이미지 */
+.logo img { height: 32px; }  /* 로고 이미지 높이 설정 */
+
+/* 📌 네비게이션 바 (메뉴 항목) */
+.main-nav { display: flex; gap: 32px; font-size: 16px; }  /* 네비게이션 메뉴 수평 정렬 및 간격 */
+.main-nav a { color: #000; text-decoration: none; font-weight: 500; }  /* 네비게이션 항목 텍스트 색상 및 굵기 */
+
+/* 📌 우측 버튼 영역 */
+.nav-actions { display: flex; gap: 12px; }  /* 로그인 / 상담신청 버튼 간격 */
+.btn-outline { padding: 6px 14px; border: 1px solid #ccc; background: white; color: #000; border-radius: 6px; font-size: 14px; text-decoration: none; }  /* 외곽선 버튼 스타일 */
+.btn-primary { padding: 6px 14px; background: #0d3d6a; color: white; border-radius: 6px; font-size: 14px; font-weight: bold; text-decoration: none; }  /* 강조 버튼 (상담 신청) 스타일 */
+
+/* 📌 상담신청 페이지: 전체 레이아웃 */
+.apply-grid { display: flex; gap: 40px; align-items: flex-start; justify-content: space-between; flex-wrap: nowrap; }  /* 좌우 2단 분할 레이아웃 */
+
+/* 📌 왼쪽 폼 전체 */
+.apply-form { flex: 1; max-width: 500px; background: white; padding: 32px; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); display: flex; flex-direction: column; gap: 20px; }  /* 상담 폼 컨테이너 스타일 */
+
+/* 📌 한 줄에 2개 필드 배치 */
+.form-row { display: flex; gap: 12px; }  /* 두 입력 필드를 좌우로 배치 */
+.form-group { flex: 1; display: flex; flex-direction: column; }  /* 각 필드 내부 정렬 */
+
+/* 📌 입력 필드 */
+.apply-form input,
+.apply-form select,
+.apply-form textarea { width: 100%; padding: 10px; font-size: 14px; border: 1px solid #ccc; border-radius: 4px; font-family: inherit; }  /* 모든 입력 필드 스타일 통일 */
+.apply-form textarea { resize: vertical; min-height: 100px; }  /* 텍스트 박스 사이즈 조절 허용 */
+
+/* 📌 입력 필드 라벨 */
+.apply-form label { font-weight: 500; font-size: 14px; margin-bottom: 4px; }  /* 라벨 폰트 및 여백 */
+
+/* 📌 개인정보 체크박스: 수평 정렬 + 줄 맞춤 */
+.checkbox-wrapper {
+  display: flex;
+  align-items: center;     /* 수직 중앙 정렬 */
+  gap: 8px;                /* 체크박스와 텍스트 간격 */
+  font-size: 14px;
+  line-height: 1.5;
+}
+.checkbox-wrapper input[type="checkbox"] {
+  margin: 0;               /* 기본 여백 제거 */
+  transform: translateY(1px); /* 위치 보정 */
+}
+
+/* 📌 제출 버튼 */
+.submit-btn { padding: 12px; background: #0d0d3d; color: white; font-weight: bold; border: none; border-radius: 4px; cursor: pointer; }  /* 신청서 작성 버튼 스타일 */
+
+/* 📌 오른쪽 상담현황 테이블 */
+.apply-list { flex: 1; max-width: 50%; background: white; padding: 24px; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }  /* 상담 목록 박스 */
+.apply-list h3 { font-size: 18px; margin-bottom: 12px; }  /* 테이블 제목 */
+.apply-list table { width: 100%; border-collapse: collapse; font-size: 14px; }  /* 상담 테이블 스타일 */
+.apply-list th, .apply-list td { padding: 8px; border-bottom: 1px solid #eee; text-align: left; }  /* 테이블 셀 정렬 */
+
+/* 📌 푸터 */
+footer { text-align: center; padding: 20px; background: #eee; font-size: 14px; color: #555; }  /* 푸터 기본 정렬 및 색상 */
+
+/* 📌 반응형 처리 (태블릿 이하) */
+@media (max-width: 768px) {
+  .apply-grid { flex-direction: column; }  /* 모바일에서는 위아래로 쌓기 */
+  .apply-form, .apply-list { max-width: 100%; }  /* 모바일에서는 폭 100% */
+  .main-nav { flex-wrap: wrap; gap: 12px; justify-content: center; }  /* 네비게이션 줄바꿈 */
+  .header-inner { flex-direction: column; gap: 12px; }  /* 헤더 수직 정렬 */
+  .nav-actions { align-self: flex-end; }  /* 버튼 오른쪽 정렬 유지 */
+}
+/* 📌 오시는 길: 좌우 2단 레이아웃 */
+.location-grid {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+/* 📍 안내 텍스트 박스 */
+.location-info {
+  flex: 1;
+  font-size: 15px;
+  max-width: 50%;
+}
+
+/* 🗺️ 지도 박스 */
+.location-map {
+  flex: 1;
+  max-width: 50%;
+
+}
+
+.location-map .root_daum_roughmap {
+  width: 100% !important;
+  height: 360px !important;
+}
+
+/* 📱 모바일 대응 */
+@media (max-width: 768px) {
+  .location-grid {
+    flex-direction: column;
   }
-  
-  *, *::before, *::after {
-    box-sizing: inherit;
+}
+
+/* -------------- 서비스 탭 -------------- */
+/* 📌 Hero 배너 */
+.hero-banner {
+  position: relative;
+  height: 400px;
+  overflow: hidden;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.4); /* 어두운 오버레이 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  padding: 0 24px;
+}
+
+.hero-text h1 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.hero-text p {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* 📌 주요 서비스 타이틀 영역 (정렬 맞춤) */
+.service-header {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 16px 20px;
+}
+
+.service-header h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #111;
+  margin-bottom: 8px;
+}
+
+.service-header p {
+  font-size: 14px;
+  color: #666;
+}
+
+
+/* 📌 서비스 페이지: 전체 레이아웃 */
+.service-page {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 16px;
+  gap: 40px;
+}
+
+/* 📍 왼쪽 사이드바 */
+.service-sidebar {
+  flex: 0 0 180px;
+  position: sticky;
+  top: 120px;
+  align-self: flex-start;
+}
+
+.service-sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.service-sidebar li {
+  margin-bottom: 12px;
+}
+
+.service-sidebar a {
+  display: block;
+  font-size: 15px;
+  color: #333;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.service-sidebar a:hover {
+  background: #f0f0f0;
+}
+
+.service-sidebar a.active {
+  background: #0d3d6a;
+  color: white;
+  font-weight: bold;
+}
+
+/* 📍 서비스 카드뷰 영역 */
+.service-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+}
+
+/* 📌 각 카드 구성 */
+.service-card {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+}
+
+.service-card.reverse {
+  flex-direction: row-reverse;
+}
+
+/* 📍 카드 내 텍스트 */
+.card-text {
+  flex: 1;
+}
+
+.card-text h2 {
+  font-size: 24px;
+  color: #0d3d6a;
+  margin-bottom: 12px;
+}
+
+.card-text .section-num {
+  font-size: 64px;
+  color: #f0f0f0;
+  font-weight: 800;
+  line-height: 1;
+  display: block;
+  margin-bottom: -20px;
+}
+
+.card-text p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #333;
+}
+
+.card-text .cta-link {
+  display: inline-block;
+  margin-top: 12px;
+  color: #0d3d6a;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.card-text .cta-link:hover {
+  text-decoration: underline;
+}
+
+/* 📍 카드 내 이미지 */
+.card-image {
+  flex: 1;
+  max-width: 380px;
+}
+
+.card-image img {
+  width: 100%;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+/* 📱 반응형: 모바일 대응 */
+@media (max-width: 768px) {
+  .service-page {
+    flex-direction: column;
+    padding: 30px 16px;
   }
-  
-  body {
-    font-family: 'Pretendard', sans-serif;
-    margin: 0;
-    padding: 0;
-    background: #f9f9f9;
-    color: #333;
-    line-height: 1.5;
-  }
-  
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 16px;
-  }
-  
-  /* ────────────────────────────── */
-  /* 헤더 */
-  
-  .main-header {
-    background: linear-gradient(to right, #dfefff, #0d3d6a);
-    color: #ffffff;
-    padding: 12px 32px;
-  }
-  
-  .header-inner {
+
+  .service-sidebar {
+    position: static;
+    width: 100%;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
-  /* 로고 + 텍스트 묶음 */
-  .logo {
-    display: flex;
-    align-items: center;
+    overflow-x: auto;
     gap: 12px;
+    margin-bottom: 24px;
   }
-  
-  .logo img {
-    height: 40px;
-  }
-  
-  .logo-text {
-    line-height: 1.2;
-    font-weight: bold;
-    font-size: 14px;
-  }
-  
-  .logo-text .sub {
-    font-size: 12px;
-    font-weight: normal;
-  }
-  
-  /* 메뉴 */
-  .main-nav {
+
+  .service-sidebar ul {
     display: flex;
-    gap: 30px;
-    font-size: 14px;
+    gap: 8px;
+    flex-wrap: nowrap;
   }
-  
-  .main-nav a {
-    color: white;
-    text-decoration: none;
-    font-weight: 500;
-  }
-  
-  .main-nav a:hover {
-    text-decoration: underline;
-  }
-  
-  /* 로그인 + 상담 버튼 */
-  .nav-actions {
-    display: flex;
-    gap: 16px;
-  }
-  
-  .nav-actions a {
-    color: white;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: normal;
-  }
-  
-  /* ────────────────────────────── */
-  /* 메인 콘텐츠 및 CTA 버튼 */
-  
-  main {
-    padding: 50px;
+
+  .service-card {
+    flex-direction: column;
     text-align: center;
   }
-  
-  .cta {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 12px 24px;
-    background: #007bff;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
+
+  .service-card.reverse {
+    flex-direction: column;
   }
-  
-  /* ────────────────────────────── */
-  /* 푸터 */
-  
-  footer {
+
+  .card-image {
+    max-width: 100%;
+  }
+
+  .card-text h2 {
+    font-size: 20px;
+  }
+
+  .card-text .section-num {
+    font-size: 48px;
+  }
+}
+
+/* 📌 프로필 Hero 영역 */
+.profile-hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 60px 32px;
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  gap: 32px;
+}
+
+.profile-left {
+  flex: 1;
+  min-width: 280px;
+}
+
+.sub-title {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 8px;
+}
+
+.main-title {
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1.5;
+  margin-bottom: 20px;
+  white-space: pre-line;
+}
+
+.profile-right {
+  flex: 1;
+  text-align: center;
+}
+
+.profile-photo {
+  width: 480px;
+  border-radius: 24px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.caption {
+  font-size: 14px;
+  margin-top: 10px;
+  color: #222;
+}
+
+.main-video {
+  display: flex;
+  justify-content: center;       /* 가운데 정렬 */
+  padding: 40px 16px;
+  background: #f8f8f8;
+}
+
+.video-wrapper {
+  width: 100%;
+  max-width: 1000px;              /* 최대 너비 제한 */
+  aspect-ratio: 16 / 9;          /* 비율 유지 (지원 브라우저) */
+  position: relative;
+}
+
+.video-wrapper iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+
+/* 반응형 대응 */
+@media (max-width: 768px) {
+  .profile-hero {
+    flex-direction: column;
     text-align: center;
-    padding: 20px;
-    background: #eee;
-    font-size: 14px;
-    color: #555;
   }
-  
-  /* ────────────────────────────── */
-  /* 반응형 대응 */
-  
-  @media (max-width: 1024px) {
-    .main-nav {
-      gap: 20px;
-      font-size: 13px;
-    }
-  
-    .nav-actions {
-      gap: 12px;
-    }
-  
-    .logo img {
-      height: 32px;
-    }
+
+  .profile-left {
+    text-align: center;
   }
-  
-  @media (max-width: 768px) {
-    .header-inner {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 12px;
-    }
-  
-    .main-nav {
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-  
-    .nav-actions {
-      align-self: flex-end;
-    }
-  
-    main {
-      padding: 30px 16px;
-    }
-  }
+}

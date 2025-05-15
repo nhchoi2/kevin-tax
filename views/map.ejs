@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+        <%= title %>
+    </title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+    <%- include('partials/header') %>
+        <main class="container" style="padding: 60px 0;">
+
+            <div class="location-grid">
+                <!-- 📍 왼쪽: 안내 텍스트 -->
+                <div class="location-info">
+                    <h3>📌 주소</h3>
+                    <p>서울 송파구 송파대로22길 5-20, 1층 101호</p>
+
+                    <h3>☎️ 전화</h3>
+                    <p>02-0000-0000</p>
+
+                    <h3>🚇 지하철</h3>
+                    <p>문정역, 가락시장역, 경찰병원역</p>
+
+                    <h3>🚌 버스</h3>
+                    <p>간선: 301, 302 / 지선: 3217, 3413 등</p>
+                </div>
+
+                <!-- 🗺️ 오른쪽: 지도 -->
+                <div class="location-map">
+                    <div id="daumRoughmapContainer1747209227229" class="root_daum_roughmap root_daum_roughmap_landing">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 📌 지도 스크립트 (하단에 위치) -->
+            <script charset="UTF-8" class="daum_roughmap_loader_script"
+                src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
+            <script charset="UTF-8">
+                new daum.roughmap.Lander({
+                    "timestamp": "1747209227229",
+                    "key": "2ozsm",
+                    "mapWidth": "100%",
+                    "mapHeight": "360"
+                }).render();
+            </script>
+        </main>
+
+        <%- include('partials/footer') %>
+</body>
+
+</html>
