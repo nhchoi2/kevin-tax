@@ -381,7 +381,7 @@ footer { text-align: center; padding: 20px; background: #eee; font-size: 14px; c
 
 .video-wrapper {
   width: 100%;
-  max-width: 1000px;              /* 최대 너비 제한 */
+  max-width: 960px;              /* 최대 너비 제한 */
   aspect-ratio: 16 / 9;          /* 비율 유지 (지원 브라우저) */
   position: relative;
 }
@@ -391,6 +391,7 @@ footer { text-align: center; padding: 20px; background: #eee; font-size: 14px; c
   height: 100%;
   border: none;
   display: block;
+}
 
 /* 반응형 대응 */
 @media (max-width: 768px) {
