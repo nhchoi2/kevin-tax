@@ -7,6 +7,7 @@ const blogRouter = require('./routes/blog');
 const mapRouter = require('./routes/map');
 const applyRouter = require('./routes/apply');
 const serviceRouter = require('./routes/service');
+const introRouter = require('./routes/intro');
 
 
 // 뷰 엔진 설정
@@ -22,6 +23,7 @@ app.use('/blog', blogRouter);
 app.use('/map', mapRouter);
 app.use('/apply', applyRouter);
 app.use('/service', serviceRouter);
+app.use('/intro', introRouter);
 
 // 서버 실행
 const PORT = process.env.PORT || 3000;
