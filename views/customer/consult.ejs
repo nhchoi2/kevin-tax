@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title><%= title %> | 케빈텍스</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <%- include('../partials/header') %>
+
+  <main class="container" style="padding: 60px 0;">
+    <h1><%= title %></h1>
+
+    <% if (consults.length > 0) { %>
+      <table class="apply-list">
+        <thead>
+          <tr>
+            <th>번호</th>
+            <th>날짜</th>
+            <th>상담유형</th>
+            <th>상태</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% consults.forEach((item, i) => { %>
+            <tr>
+              <td><%= i + 1 %></td>
+              <td><%= item.date %></td>
+              <td><%= item.type %></td>
+              <td><%= item.status %></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    <% } else { %>
+      <p>상담 신청 내역이 없습니다.</p>
+    <% } %>
+  </main>
+
+  <%- include('../partials/footer') %>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <%- include('../partials/header') %>
+
+  <main class="container" style="padding: 60px 0;">
+    <h1>설정</h1>
+
+    <form class="apply-form" action="#" method="POST">
+      <label>이메일</label>
+      <input type="email" name="email" placeholder="변경할 이메일" />
+
+      <label>연락처</label>
+      <input type="tel" name="phone" placeholder="변경할 연락처" />
+
+      <label>비밀번호</label>
+      <input type="password" name="password" placeholder="새 비밀번호" />
+
+      <label>
+        <input type="checkbox" name="notify" /> 알림 수신 동의
+      </label>
+
+      <button type="submit" class="submit-btn">설정 저장</button>
+    </form>
+
+    <hr style="margin: 40px 0;" />
+
+    <form action="/customer/settings/delete" method="POST">
+      <button type="submit" class="btn-outline" onclick="return confirm('정말 탈퇴하시겠습니까?')">
+        회원 탈퇴
+      </button>
+    </form>
+  </main>
+
+  <%- include('../partials/footer') %>
+</body>
+</html>

@@ -1,10 +1,11 @@
-// routes/intro.js
+// routes/blog.js
 const express = require('express');
 const router = express.Router();
 
-// 인트로 페이지 렌더링
 router.get('/', (req, res) => {
-  res.render('intro');
+  res.render('customer/blog', {
+    title: '케빈텍스 블로그',
+  });
 });
 
 module.exports = router;

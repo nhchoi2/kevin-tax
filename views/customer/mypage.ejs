@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>마이페이지 | 케빈택스</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <%- include('../partials/header') %>
+
+  <main class="container" style="max-width: 800px; padding: 60px 0;">
+    <h2 class="text-2xl font-bold mb-6">마이페이지</h2>
+
+    <section class="apply-form">
+      <div class="form-group">
+        <label>이름</label>
+        <input type="text" value="<%= user.name %>" disabled />
+      </div>
+      <div class="form-group">
+        <label>이메일</label>
+        <input type="email" value="<%= user.email %>" disabled />
+      </div>
+      <div class="form-group">
+        <label>휴대폰 번호</label>
+        <input type="text" value="<%= user.phone %>" disabled />
+      </div>
+      <div class="form-group">
+        <label>가입일</label>
+        <input type="text" value="<%= user.created_at %>" disabled />
+      </div>
+
+      <a href="/customer/logout" class="btn-outline" style="margin-top: 20px;">로그아웃</a>
+    </section>
+  </main>
+
+  <%- include('../partials/footer') %>
+</body>
+</html>

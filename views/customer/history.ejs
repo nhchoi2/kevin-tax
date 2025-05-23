@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>상담 신청 내역 | 케빈택스</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <%- include('../partials/header') %>
+
+  <main class="container" style="padding: 60px 0;">
+    <h1>상담 신청 내역</h1>
+    <table style="width: 100%; border-collapse: collapse;">
+      <thead>
+        <tr>
+          <th style="padding: 8px; border-bottom: 1px solid #ccc;">제목</th>
+          <th style="padding: 8px; border-bottom: 1px solid #ccc;">상태</th>
+          <th style="padding: 8px; border-bottom: 1px solid #ccc;">신청일</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% consults.forEach(consult => { %>
+          <tr>
+            <td style="padding: 8px;"><%= consult.title %></td>
+            <td style="padding: 8px;"><%= consult.status %></td>
+            <td style="padding: 8px;"><%= consult.date %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </main>
+
+  <%- include('../partials/footer') %>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>로그인 | 케빈텍스</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <%- include('../partials/header') %>
+
+  <main class="container" style="padding: 60px 0;">
+    <h1>로그인</h1>
+    <form action="/customer/login" method="POST" class="apply-form">
+      <label for="email">이메일</label>
+      <input type="email" name="email" required />
+      <label for="password">비밀번호</label>
+      <input type="password" name="password" required />
+      <button type="submit" class="submit-btn">로그인</button>
+    </form>
+  </main>
+
+  <%- include('../partials/footer') %>
+</body>
+</html>
