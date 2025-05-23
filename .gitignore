@@ -1,6 +1,5 @@
 # Node.js dependencies
 node_modules/
-.DS_Store
 
 # Logs
 npm-debug.log*
