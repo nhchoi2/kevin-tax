@@ -1,45 +1,207 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>회원가입 | 케빈택스</title>
-  <link rel="stylesheet" href="/css/style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>회원가입 | 케빈택스</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <style>
+        body {
+            background-color: #f6f7fa;
+            font-family: sans-serif;
+        }
+
+        .signup-container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 40px;
+        }
+
+        .section {
+            background-color: #fff;
+            padding: 24px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .section h3 {
+            margin-bottom: 16px;
+            font-size: 18px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 12px 12px 36px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        .form-group .icon {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            margin-top: 8px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background-color: #0d0d39;
+            color: white;
+            padding: 12px;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        #passwordRules {
+            font-size: 13px;
+            margin-top: 5px;
+            padding-left: 0;
+            display: none;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        #passwordRules li {
+            list-style: none;
+        }
+
+        #passwordHint {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 6px;
+        }
+    </style>
 </head>
+
 <body>
-  <%- include('../partials/header') %>
+    <%- include('../partials/header') %>
 
-  <main class="container" style="max-width: 600px; padding: 60px 0;">
-    <h2 class="text-2xl font-bold mb-6">회원가입</h2>
-    <form action="/customer/signup" method="POST" class="apply-form">
-      <div class="form-group">
-        <label for="name">이름</label>
-        <input type="text" id="name" name="name" required />
-      </div>
-      <div class="form-group">
-        <label for="email">이메일</label>
-        <input type="email" id="email" name="email" required />
-      </div>
-      <div class="form-group">
-        <label for="password">비밀번호</label>
-        <input type="password" id="password" name="password" required />
-      </div>
-      <div class="form-group">
-        <label for="confirmPassword">비밀번호 확인</label>
-        <input type="password" id="confirmPassword" name="confirmPassword" required />
-      </div>
-      <div class="form-group">
-        <label for="phone">휴대폰 번호</label>
-        <input type="text" id="phone" name="phone" required />
-      </div>
-      <div class="checkbox-wrapper">
-        <input type="checkbox" id="agree" name="agree" required />
-        <label for="agree">개인정보 수집 및 이용에 동의합니다.</label>
-      </div>
-      <button type="submit" class="submit-btn">가입하기</button>
-    </form>
-  </main>
+    <div class="signup-container">
+        <h2>회원가입</h2>
+        <form action="/signup" method="POST">
+            <div class="section">
+                <h3>기본 정보</h3>
+                <div class="form-group">
+                    <span class="icon">👤</span>
+                    <input type="text" name="name" placeholder="이름" required />
+                </div>
+                <div class="form-group">
+                    <span class="icon">✉️</span>
+                    <input type="email" name="email" placeholder="이메일" required />
+                </div>
+                <div class="form-group">
+                    <span class="icon">🔒</span>
+                    <input type="password" id="password" name="password" placeholder="비밀번호" required />
+                    <button type="button" id="togglePassword"
+                        style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); border: none; background: none; cursor: pointer;">👁</button>
+                </div>
+                <div id="passwordHint">※ 8자 이상, 영문/숫자/특수문자 포함</div>
+                <ul id="passwordRules">
+                    <li id="ruleLength">❌ 8자 이상</li>
+                    <li id="ruleAlpha">❌ 영문자 포함</li>
+                    <li id="ruleNumber">❌ 숫자 포함</li>
+                    <li id="ruleSpecial">❌ 특수문자 포함</li>
+                </ul>
+                <div class="form-group">
+                    <span class="icon">🔒</span>
+                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="비밀번호 확인" required />
+                </div>
+                <div id="matchText" style="font-size: 14px;"></div>
+            </div>
 
-  <%- include('../partials/footer') %>
+            <div class="section">
+                <h3>추가 정보</h3>
+                <div class="form-group">
+                    <span class="icon">📱</span>
+                    <input type="text" id="phone" name="phone" placeholder="휴대폰 번호" required />
+                </div>
+                <div class="form-group">
+                    <span class="icon">📅</span>
+                    <input type="text" id="birthdate" name="birthdate" placeholder="생년월일 (예: 19860524)" required />
+                </div>
+                <label>성별</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="gender" value="M" required /> 남성</label>
+                    <label><input type="radio" name="gender" value="F" /> 여성</label>
+                </div>
+                <div style="margin-top: 12px;">
+                    <label><input type="checkbox" id="agree" name="agree" required /> 개인정보 수집 및 이용에 동의합니다.</label>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">가입하기</button>
+        </form>
+    </div>
+
+    <%- include('../partials/footer') %>
+
+    <script>
+        const passwordInput = document.getElementById('password');
+        const confirmInput = document.getElementById('confirmPassword');
+        const togglePassword = document.getElementById('togglePassword');
+        const ruleLength = document.getElementById('ruleLength');
+        const ruleAlpha = document.getElementById('ruleAlpha');
+        const ruleNumber = document.getElementById('ruleNumber');
+        const ruleSpecial = document.getElementById('ruleSpecial');
+        const matchText = document.getElementById('matchText');
+        const ruleBox = document.getElementById('passwordRules');
+
+        let touched = false;
+
+        function updateRules(pw) {
+            const hasLength = pw.length >= 8;
+            const hasAlpha = /[a-zA-Z]/.test(pw);
+            const hasNumber = /\d/.test(pw);
+            const hasSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(pw);
+
+            if (!touched && pw.length > 0) {
+                touched = true;
+                ruleBox.style.display = "flex";
+            }
+
+            ruleLength.textContent = (hasLength ? "✅" : "❌") + " 8자 이상";
+            ruleAlpha.textContent = (hasAlpha ? "✅" : "❌") + " 영문자 포함";
+            ruleNumber.textContent = (hasNumber ? "✅" : "❌") + " 숫자 포함";
+            ruleSpecial.textContent = (hasSpecial ? "✅" : "❌") + " 특수문자 포함";
+
+            const passed = hasLength && hasAlpha && hasNumber && hasSpecial;
+            ruleBox.style.display = passed ? "none" : "flex";
+        }
+
+        function checkMatch() {
+            const isMatch = passwordInput.value === confirmInput.value;
+            matchText.textContent = confirmInput.value === '' ? '' : (isMatch ? '✅ 비밀번호 일치' : '❌ 비밀번호 불일치');
+            matchText.style.color = isMatch ? 'green' : 'red';
+        }
+
+        passwordInput.addEventListener('input', () => {
+            updateRules(passwordInput.value);
+            checkMatch();
+        });
+
+        confirmInput.addEventListener('input', checkMatch);
+
+        togglePassword.addEventListener('click', () => {
+            const type = passwordInput.type === 'password' ? 'text' : 'password';
+            passwordInput.type = type;
+            togglePassword.textContent = type === 'password' ? '👁' : '🙈';
+        });
+    </script>
 </body>
+
 </html>

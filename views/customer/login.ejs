@@ -10,13 +10,24 @@
 
   <main class="container" style="padding: 60px 0;">
     <h1>로그인</h1>
-    <form action="/customer/login" method="POST" class="apply-form">
+
+    <% if (error) { %>
+      <div style="color: red; margin-bottom: 10px;"><%= error %></div>
+    <% } %>
+
+    <form action="/login" method="POST" class="apply-form">
       <label for="email">이메일</label>
       <input type="email" name="email" required />
       <label for="password">비밀번호</label>
       <input type="password" name="password" required />
       <button type="submit" class="submit-btn">로그인</button>
     </form>
+
+    <!-- 회원가입 링크 -->
+    <p style="margin-top: 20px;">
+      아직 회원이 아니신가요?
+      <a href="/signup" style="color: #007bff;">회원가입</a>
+    </p>
   </main>
 
   <%- include('../partials/footer') %>
