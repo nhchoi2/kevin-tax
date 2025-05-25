@@ -29,6 +29,9 @@ router.post('/', async (req, res) => {
       refresh_token: user.refresh_token,
     };
 
+    // ✅ 마이페이지 라우터에서 사용하는 토큰도 저장
+    req.session.token = user.access_token;
+
     // 로그인 성공 → 홈으로 이동 
     res.redirect('/');
   } catch (err) {

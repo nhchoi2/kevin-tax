@@ -21,6 +21,7 @@
       <div class="info-row"><span>생년월일</span><span><%= user.birthdate %></span></div>
       <div class="info-row"><span>회사 회원 여부</span><span><%= user.is_company ? '회사 회원' : '개인 회원' %></span></div>
       <div class="info-row"><span>주소</span><span><%= user.address1 || '-' %></span></div>
+      <div class="info-row"><span>주소 (상세)</span><span><%= user.address2 || '-' %></span></div>
       <div class="info-row"><span>우편번호</span><span><%= user.postal_code || '-' %></span></div>
       <div class="info-row"><span>가입일</span><span><%= user.created_at?.split('T')[0] %></span></div>
       <div class="info-row"><span>최근 로그인</span><span><%= user.last_login_at?.split('T')[0] || '-' %></span></div>

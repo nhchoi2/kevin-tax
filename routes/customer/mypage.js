@@ -59,6 +59,15 @@ router.post('/edit', async (req, res) => {
   }
 
   try {
+    // 🔥 여기가 핵심입니다: 타입 변환
+    req.body.is_company = req.body.is_company === 'true';
+    req.body.company_id = req.body.company_id ? parseInt(req.body.company_id) : null;
+
+    // 🔥 생년월일 YYYYMMDD → YYYY-MM-DD 변환
+    if (req.body.birthdate?.length === 8) {
+      req.body.birthdate = `${req.body.birthdate.slice(0, 4)}-${req.body.birthdate.slice(4, 6)}-${req.body.birthdate.slice(6, 8)}`;
+    }
+
     await axios.put('http://localhost:8000/customer/mypage', req.body, {
       headers: {
         Authorization: `Bearer ${req.session.token}`
